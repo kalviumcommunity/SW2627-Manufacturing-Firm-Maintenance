@@ -1,0 +1,7 @@
+PR_README.md
+/daily-updates/
+.venv/
+backend/venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
