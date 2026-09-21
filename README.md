@@ -18,12 +18,8 @@ Technicians on the floor need fast answers when equipment fails, but the knowled
 ├── frontend/       # Next.js (TypeScript) app
 ├── backend/        # FastAPI app
 │   ├── app/
-│   │   ├── data.py
 │   │   ├── main.py
-│   │   ├── schemas.py
-│   │   └── services.py
-│   ├── tests/
-│   │   └── test_api.py
+│   │   └── __init__.py
 │   ├── README.md
 │   └── requirements.txt
 ├── daily-updates/
@@ -53,15 +49,9 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-### Backend API Endpoints
+### Backend API Endpoint
 
-- `GET /api/v1/health` - service health check and version
-- `GET /api/v1/equipment` - list available equipment
-- `GET /api/v1/equipment/{equipment_id}` - equipment context and source inventory
-- `GET /api/v1/search?q=...` - ranked source excerpts with optional filters
-- `POST /api/v1/assistant/query` - deterministic source-referenced troubleshooting response
-
-The original `/health`, `/machines`, and `/guidance` endpoints remain available for compatibility. See [backend/README.md](backend/README.md) for request examples and testing instructions.
+- `GET /health` - initial service health check
 
 ### Frontend (Next.js)
 
@@ -73,5 +63,5 @@ npm run dev
 
 ## Status
 
-- Backend v0.1 implementation includes simulated equipment data, ranked source search, safety-first assistant responses, CORS, and automated API tests.
-- Frontend integration pending.
+- Day 1 backend scaffold is complete.
+- Domain data, assistant APIs, retrieval, frontend integration, and broader tests are planned for later days.
