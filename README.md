@@ -19,7 +19,10 @@ Technicians on the floor need fast answers when equipment fails, but the knowled
 ├── backend/        # FastAPI app
 │   ├── app/
 │   │   ├── main.py
+│   │   ├── schemas.py
 │   │   └── __init__.py
+│   ├── tests/
+│   │   └── test_schemas.py
 │   ├── README.md
 │   └── requirements.txt
 ├── daily-updates/
@@ -30,7 +33,7 @@ Technicians on the floor need fast answers when equipment fails, but the knowled
 ## Weekly Backend Plan
 
 - **Day 1 (Mon):** API scaffold, simulated data model, and base endpoints
-- **Day 2 (Tue):** Add issue-guidance endpoint with source references
+- **Day 2 (Tue):** Define typed domain and API contract
 - **Day 3 (Wed):** Integrate frontend with machine and guidance APIs
 - **Day 4 (Thu):** Improve matching logic and response contracts
 - **Day 5 (Fri):** Add auth/role scaffolding (if required), tighten validations
@@ -53,6 +56,8 @@ uvicorn app.main:app --reload
 
 - `GET /health` - initial service health check
 
+Day 2 contract models are defined in [backend/app/schemas.py](backend/app/schemas.py). They cover equipment, manuals, maintenance logs, safety procedures, search, assistant responses, source excerpts, and errors. Runtime routes beyond `/health` are planned for later days.
+
 ### Frontend (Next.js)
 
 ```bash
@@ -64,4 +69,5 @@ npm run dev
 ## Status
 
 - Day 1 backend scaffold is complete.
+- Day 2 schemas and API contract are complete.
 - Domain data, assistant APIs, retrieval, frontend integration, and broader tests are planned for later days.
