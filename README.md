@@ -34,7 +34,7 @@ Technicians on the floor need fast answers when equipment fails, but the knowled
 
 - **Day 1 (Mon):** API scaffold, simulated data model, and base endpoints
 - **Day 2 (Tue):** Define typed domain and API contract
-- **Day 3 (Wed):** Integrate frontend with machine and guidance APIs
+- **Day 3 (Wed):** Add fictional equipment catalogue and source records
 - **Day 4 (Thu):** Improve matching logic and response contracts
 - **Day 5 (Fri):** Add auth/role scaffolding (if required), tighten validations
 - **Day 6 (Sat):** Testing pass, cleanup, and API docs review
@@ -70,4 +70,5 @@ npm run dev
 
 - Day 1 backend scaffold is complete.
 - Day 2 schemas and API contract are complete.
-- Domain data, assistant APIs, retrieval, frontend integration, and broader tests are planned for later days.
+- Day 3 seed data layer is in place with fictional equipment, manuals, maintenance logs, and safety procedures.
+- Assistant APIs, retrieval logic, frontend integration, and broader tests are planned for later days.

@@ -29,7 +29,18 @@ The typed contract in `app/schemas.py` defines the payloads that later routes wi
 - `SourceExcerpt` for consistent source attribution.
 - `ErrorResponse` for stable nested error details.
 
-Search questions are limited to 3-500 characters, result limits to 1-10, and document types to `manual`, `maintenance_log`, or `safety_procedure`. The routes and simulated records will be added on later days.
+Search questions are limited to 3-500 characters, result limits to 1-10, and document types to `manual`, `maintenance_log`, or `safety_procedure`.
+
+## Day 3 seed data
+
+The in-memory source data lives in `app/data.py` and includes:
+
+- A three-machine equipment catalogue.
+- Manual excerpts for troubleshooting and calibration.
+- Maintenance log records tied to the equipment IDs.
+- Safety procedure steps and PPE requirements.
+
+These records are intentionally static and in-memory for the frontend prototype.
 
 ## Test
 
