@@ -42,6 +42,16 @@ The in-memory source data lives in `app/data.py` and includes:
 
 These records are intentionally static and in-memory for the frontend prototype.
 
+## Day 4 retrieval and response logic
+
+The service layer in `app/services.py` adds:
+
+- Source matching based on query tokens and equipment filters.
+- Ranked results sorted by relevance score.
+- Assistant responses that select the strongest source and include a safety notice when safety procedures are relevant.
+
+The retrieval logic is intentionally deterministic and in-memory, so it works without a database or external AI service.
+
 ## Test
 
 From the repository root:
