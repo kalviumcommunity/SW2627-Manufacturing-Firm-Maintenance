@@ -18,4 +18,53 @@ The interactive API documentation is available at `http://127.0.0.1:8000/docs`.
 
 - `GET /health` returns `{"status": "ok"}`.
 
-Domain models, simulated records, troubleshooting routes, and automated API tests are scheduled for later days.
+## Day 2 contract models
+
+The typed contract in `app/schemas.py` defines the payloads that later routes will use:
+
+- `Equipment` for machine identity, area, and operational status.
+- `ManualDocument`, `MaintenanceLog`, and `SafetyProcedure` for source records.
+- `SearchRequest` and `SearchResponse` for bounded source search.
+- `AssistantQuery` and `AssistantResponse` for source-referenced troubleshooting.
+- `SourceExcerpt` for consistent source attribution.
+- `ErrorResponse` for stable nested error details.
+
+Search questions are limited to 3-500 characters, result limits to 1-10, and document types to `manual`, `maintenance_log`, or `safety_procedure`.
+
+## Day 3 seed data
+
+The in-memory source data lives in `app/data.py` and includes:
+
+- A three-machine equipment catalogue.
+- Manual excerpts for troubleshooting and calibration.
+- Maintenance log records tied to the equipment IDs.
+- Safety procedure steps and PPE requirements.
+
+These records are intentionally static and in-memory for the frontend prototype.
+
+## Day 4 retrieval and response logic
+
+The service layer in `app/services.py` adds:
+
+- Source matching based on query tokens and equipment filters.
+- Ranked results sorted by relevance score.
+- Assistant responses that select the strongest source and include a safety notice when safety procedures are relevant.
+
+The retrieval logic is intentionally deterministic and in-memory, so it works without a database or external AI service.
+
+## Day 5 API routes
+
+The FastAPI app exposes the retrieval behavior through these routes:
+
+- `POST /api/v1/search` accepts a `SearchRequest` and returns ranked `SourceExcerpt` records.
+- `POST /api/v1/assistant` accepts an `AssistantQuery` and returns source-referenced troubleshooting guidance.
+
+Both routes use the Day 2 validation contract, including bounded query lengths and result limits. Invalid requests receive FastAPI validation responses.
+
+## Test
+
+From the repository root:
+
+```bash
+pytest -q
+```
