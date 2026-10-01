@@ -52,10 +52,19 @@ The service layer in `app/services.py` adds:
 
 The retrieval logic is intentionally deterministic and in-memory, so it works without a database or external AI service.
 
+## Day 5 API routes
+
+The FastAPI app exposes the retrieval behavior through these routes:
+
+- `POST /api/v1/search` accepts a `SearchRequest` and returns ranked `SourceExcerpt` records.
+- `POST /api/v1/assistant` accepts an `AssistantQuery` and returns source-referenced troubleshooting guidance.
+
+Both routes use the Day 2 validation contract, including bounded query lengths and result limits. Invalid requests receive FastAPI validation responses.
+
 ## Test
 
 From the repository root:
 
 ```bash
-pytest -q backend/tests/test_schemas.py
+pytest -q
 ```

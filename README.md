@@ -36,7 +36,7 @@ Technicians on the floor need fast answers when equipment fails, but the knowled
 - **Day 2 (Tue):** Define typed domain and API contract
 - **Day 3 (Wed):** Add fictional equipment catalogue and source records
 - **Day 4 (Thu):** Improve matching logic and retrieval ranking for troubleshooting responses
-- **Day 5 (Fri):** Add auth/role scaffolding (if required), tighten validations
+- **Day 5 (Fri):** Expose search and assistant APIs with validated request/response flows
 - **Day 6 (Sat):** Testing pass, cleanup, and API docs review
 - **Day 7 (Sun):** Final demo prep and PR consolidation
 
@@ -52,11 +52,13 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-### Backend API Endpoint
+### Backend API Endpoints
 
 - `GET /health` - initial service health check
+- `POST /api/v1/search` - ranked source search with optional equipment and document-type filters
+- `POST /api/v1/assistant` - source-referenced troubleshooting guidance
 
-Day 2 contract models are defined in [backend/app/schemas.py](backend/app/schemas.py). They cover equipment, manuals, maintenance logs, safety procedures, search, assistant responses, source excerpts, and errors. Runtime routes beyond `/health` are planned for later days.
+Day 2 contract models are defined in [backend/app/schemas.py](backend/app/schemas.py). They cover equipment, manuals, maintenance logs, safety procedures, search, assistant responses, source excerpts, and errors.
 
 ### Frontend (Next.js)
 
@@ -72,4 +74,5 @@ npm run dev
 - Day 2 schemas and API contract are complete.
 - Day 3 seed data layer is in place with fictional equipment, manuals, maintenance logs, and safety procedures.
 - Day 4 retrieval logic is active with source ranking and assistant response generation.
+- Day 5 search and assistant API routes are available under `/api/v1`.
 - Frontend integration and broader tests are planned for later days.
