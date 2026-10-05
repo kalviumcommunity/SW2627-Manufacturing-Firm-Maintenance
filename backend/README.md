@@ -61,6 +61,8 @@ The FastAPI app exposes the retrieval behavior through these routes:
 
 Both routes use the Day 2 validation contract, including bounded query lengths and result limits. Invalid requests receive FastAPI validation responses.
 
+The generated OpenAPI documentation groups routes into `system` and `troubleshooting` tags and is available at `/docs` when the service is running.
+
 ## Test
 
 From the repository root:
