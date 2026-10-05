@@ -75,4 +75,5 @@ npm run dev
 - Day 3 seed data layer is in place with fictional equipment, manuals, maintenance logs, and safety procedures.
 - Day 4 retrieval logic is active with source ranking and assistant response generation.
 - Day 5 search and assistant API routes are available under `/api/v1`.
+- Day 6 edge-case tests and OpenAPI route metadata are complete.
 - Frontend integration and broader tests are planned for later days.
