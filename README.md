@@ -15,16 +15,25 @@ Technicians on the floor need fast answers when equipment fails, but useful know
 
 ```
 .
-├── app/            # Next.js App Router pages and styles
-├── components/     # Shared frontend components
-├── lib/            # Frontend mock data
-├── backend/        # FastAPI service and tests
-└── package.json    # Frontend scripts and dependencies
+├── backend/        # FastAPI app
+│   ├── app/
+│   │   ├── main.py
+│   │   ├── data.py
+│   │   ├── services.py
+│   │   ├── schemas.py
+│   │   └── __init__.py
+│   ├── tests/
+│   │   │   ├── test_api.py
+│   │   │   ├── test_data.py
+│   │   │   ├── test_schemas.py
+│   │   │   └── test_services.py
+│   ├── README.md
+│   └── requirements.txt
+├── daily-updates/  # Local, git-ignored daily implementation notes
+├── PR_README.md    # Local, git-ignored cumulative PR summary
+├── pytest.ini
+└── README.md
 ```
-
-## Getting Started
-
-### Frontend (Next.js)
 
 Requires Node.js 18.17 or later.
 
@@ -54,22 +63,21 @@ uvicorn app.main:app --reload
 
 Backend API endpoints:
 
-- `GET /health` - service health check
+- `GET /health` - initial service health check
+- `GET /api/v1/equipment` - equipment catalogue for frontend machine selection
 - `POST /api/v1/search` - ranked source search with optional equipment and document-type filters
 - `POST /api/v1/assistant` - source-referenced troubleshooting guidance
 
-## Weekly Backend Plan
+### Frontend integration
 
-- **Day 1 (Mon):** API scaffold, simulated data model, and base endpoints
-- **Day 2 (Tue):** Define typed domain and API contract
-- **Day 3 (Wed):** Add fictional equipment catalogue and source records
-- **Day 4 (Thu):** Improve matching logic and retrieval ranking for troubleshooting responses
-- **Day 5 (Fri):** Expose search and assistant APIs with validated request/response flows
-- **Day 6 (Sat):** Testing pass, cleanup, and API docs review
-- **Day 7 (Sun):** Final demo prep and PR consolidation
+The backend is ready for a frontend running on `http://localhost:3000` or `http://127.0.0.1:3000`. Use `GET /api/v1/equipment` to populate machine selection, then send the selected equipment ID to the search and assistant endpoints.
 
 ## Status
 
-- Backend API, domain schemas, seed data, retrieval logic, and OpenAPI route metadata are implemented.
-- Backend tests are in `backend/tests/`.
-- The frontend technician and admin flows are implemented with mock data.
+- Day 1 backend scaffold is complete.
+- Day 2 schemas and API contract are complete.
+- Day 3 seed data layer is in place with fictional equipment, manuals, maintenance logs, and safety procedures.
+- Day 4 retrieval logic is active with source ranking and assistant response generation.
+- Day 5 search and assistant API routes are available under `/api/v1`.
+- Day 6 edge-case tests and OpenAPI route metadata are complete.
+- Day 7 frontend integration surface and final validation are complete.

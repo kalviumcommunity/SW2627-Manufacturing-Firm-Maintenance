@@ -1,6 +1,14 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
-from backend.app.schemas import AssistantQuery, AssistantResponse, SearchRequest, SearchResponse
+from backend.app.data import get_seed_data
+from backend.app.schemas import (
+    AssistantQuery,
+    AssistantResponse,
+    Equipment,
+    SearchRequest,
+    SearchResponse,
+)
 from backend.app.services import build_assistant_response, search_documents
 
 app = FastAPI(
@@ -13,6 +21,14 @@ app = FastAPI(
     ],
 )
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_credentials=False,
+    allow_methods=["GET", "POST"],
+    allow_headers=["*"],
+)
+
 
 @app.get(
     "/health",
@@ -22,6 +38,17 @@ app = FastAPI(
 )
 def health() -> dict[str, str]:
     return {"status": "ok"}
+
+
+@app.get(
+    "/api/v1/equipment",
+    response_model=list[Equipment],
+    tags=["troubleshooting"],
+    summary="List available equipment",
+    operation_id="listEquipment",
+)
+def list_equipment() -> list[Equipment]:
+    return get_seed_data()["equipment"]
 
 
 @app.post(
