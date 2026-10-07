@@ -71,13 +71,3 @@ Backend API endpoints:
 ### Frontend integration
 
 The backend is ready for a frontend running on `http://localhost:3000` or `http://127.0.0.1:3000`. Use `GET /api/v1/equipment` to populate machine selection, then send the selected equipment ID to the search and assistant endpoints.
-
-## Status
-
-- Day 1 backend scaffold is complete.
-- Day 2 schemas and API contract are complete.
-- Day 3 seed data layer is in place with fictional equipment, manuals, maintenance logs, and safety procedures.
-- Day 4 retrieval logic is active with source ranking and assistant response generation.
-- Day 5 search and assistant API routes are available under `/api/v1`.
-- Day 6 edge-case tests and OpenAPI route metadata are complete.
-- Day 7 frontend integration surface and final validation are complete.
