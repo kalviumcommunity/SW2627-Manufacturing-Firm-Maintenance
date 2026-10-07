@@ -56,12 +56,15 @@ The retrieval logic is intentionally deterministic and in-memory, so it works wi
 
 The FastAPI app exposes the retrieval behavior through these routes:
 
+- `GET /api/v1/equipment` returns the seeded machine catalogue for frontend selection.
 - `POST /api/v1/search` accepts a `SearchRequest` and returns ranked `SourceExcerpt` records.
 - `POST /api/v1/assistant` accepts an `AssistantQuery` and returns source-referenced troubleshooting guidance.
 
 Both routes use the Day 2 validation contract, including bounded query lengths and result limits. Invalid requests receive FastAPI validation responses.
 
 The generated OpenAPI documentation groups routes into `system` and `troubleshooting` tags and is available at `/docs` when the service is running.
+
+For local frontend development, CORS allows `http://localhost:3000` and `http://127.0.0.1:3000`.
 
 ## Test
 

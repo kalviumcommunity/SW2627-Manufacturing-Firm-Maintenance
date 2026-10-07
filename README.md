@@ -15,18 +15,23 @@ Technicians on the floor need fast answers when equipment fails, but the knowled
 
 ```
 .
-├── frontend/       # Next.js (TypeScript) app
 ├── backend/        # FastAPI app
 │   ├── app/
 │   │   ├── main.py
+│   │   ├── data.py
+│   │   ├── services.py
 │   │   ├── schemas.py
 │   │   └── __init__.py
 │   ├── tests/
-│   │   └── test_schemas.py
+│   │   │   ├── test_api.py
+│   │   │   ├── test_data.py
+│   │   │   ├── test_schemas.py
+│   │   │   └── test_services.py
 │   ├── README.md
 │   └── requirements.txt
-├── daily-updates/
-│   └── README-2026-09-21.md
+├── daily-updates/  # Local, git-ignored daily implementation notes
+├── PR_README.md    # Local, git-ignored cumulative PR summary
+├── pytest.ini
 └── README.md
 ```
 
@@ -38,7 +43,7 @@ Technicians on the floor need fast answers when equipment fails, but the knowled
 - **Day 4 (Thu):** Improve matching logic and retrieval ranking for troubleshooting responses
 - **Day 5 (Fri):** Expose search and assistant APIs with validated request/response flows
 - **Day 6 (Sat):** Testing pass, cleanup, and API docs review
-- **Day 7 (Sun):** Final demo prep and PR consolidation
+- **Day 7 (Sun):** Final demo prep, frontend integration readiness, and PR consolidation
 
 ## Getting Started
 
@@ -55,18 +60,15 @@ uvicorn app.main:app --reload
 ### Backend API Endpoints
 
 - `GET /health` - initial service health check
+- `GET /api/v1/equipment` - equipment catalogue for frontend machine selection
 - `POST /api/v1/search` - ranked source search with optional equipment and document-type filters
 - `POST /api/v1/assistant` - source-referenced troubleshooting guidance
 
 Day 2 contract models are defined in [backend/app/schemas.py](backend/app/schemas.py). They cover equipment, manuals, maintenance logs, safety procedures, search, assistant responses, source excerpts, and errors.
 
-### Frontend (Next.js)
+### Frontend integration
 
-```bash
-cd frontend
-npm install
-npm run dev
-```
+The backend is ready for a frontend running on `http://localhost:3000` or `http://127.0.0.1:3000`. Use `GET /api/v1/equipment` to populate machine selection, then send the selected equipment ID to the search and assistant endpoints.
 
 ## Status
 
@@ -76,4 +78,4 @@ npm run dev
 - Day 4 retrieval logic is active with source ranking and assistant response generation.
 - Day 5 search and assistant API routes are available under `/api/v1`.
 - Day 6 edge-case tests and OpenAPI route metadata are complete.
-- Frontend integration and broader tests are planned for later days.
+- Day 7 frontend integration surface and final validation are complete.

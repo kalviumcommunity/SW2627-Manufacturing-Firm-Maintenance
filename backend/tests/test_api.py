@@ -13,6 +13,18 @@ def test_health_route_reports_service_status() -> None:
     assert response.json() == {"status": "ok"}
 
 
+def test_equipment_route_returns_machine_catalogue() -> None:
+    response = client.get("/api/v1/equipment")
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert [machine["equipment_id"] for machine in payload] == [
+        "conveyor-01",
+        "press-02",
+        "mixer-03",
+    ]
+
+
 def test_search_route_returns_ranked_source_results() -> None:
     response = client.post(
         "/api/v1/search",
@@ -78,8 +90,22 @@ def test_openapi_documents_day_five_operations() -> None:
 
     assert response.status_code == 200
     paths = response.json()["paths"]
+    assert "get" in paths["/api/v1/equipment"]
     assert "post" in paths["/api/v1/search"]
     assert "post" in paths["/api/v1/assistant"]
+
+
+def test_api_allows_frontend_origin_for_development() -> None:
+    response = client.options(
+        "/api/v1/equipment",
+        headers={
+            "Origin": "http://localhost:3000",
+            "Access-Control-Request-Method": "GET",
+        },
+    )
+
+    assert response.status_code == 200
+    assert response.headers["access-control-allow-origin"] == "http://localhost:3000"
 
 
 def test_unknown_equipment_is_valid_but_returns_no_matches() -> None:
