@@ -1,17 +1,17 @@
 # Manufacturing Floor Assistant
 
-A tool that gives floor technicians immediate, source-referenced fixes during machine failures — pulling from equipment manuals, maintenance logs, and safety procedures — to cut downtime.
+A tool that gives floor technicians immediate, source-referenced fixes during machine failures, drawing on equipment manuals, maintenance logs, and safety procedures to help reduce downtime.
 
 ## Problem
 
-Technicians on the floor need fast answers when equipment fails, but the knowledge to fix it is scattered across manuals, historical maintenance logs, and safety documents. Digging through these manually during a failure event slows everything down. This project aims to surface the right fix, with its source, in the moment it's needed.
+Technicians on the floor need fast answers when equipment fails, but useful knowledge is scattered across manuals, historical maintenance logs, and safety documents. This project aims to surface relevant fixes and their sources when they are needed.
 
 ## Tech Stack
 
-- **Frontend:** Next.js (React + TypeScript)
+- **Frontend:** Next.js (React and JavaScript)
 - **Backend:** FastAPI (Python)
 
-## Repo Structure
+## Repository Structure
 
 ```
 .
@@ -35,36 +35,38 @@ Technicians on the floor need fast answers when equipment fails, but the knowled
 └── README.md
 ```
 
-## Weekly Backend Plan
+Requires Node.js 18.17 or later.
 
-- **Day 1 (Mon):** API scaffold, simulated data model, and base endpoints
-- **Day 2 (Tue):** Define typed domain and API contract
-- **Day 3 (Wed):** Add fictional equipment catalogue and source records
-- **Day 4 (Thu):** Improve matching logic and retrieval ranking for troubleshooting responses
-- **Day 5 (Fri):** Expose search and assistant APIs with validated request/response flows
-- **Day 6 (Sat):** Testing pass, cleanup, and API docs review
-- **Day 7 (Sun):** Final demo prep, frontend integration readiness, and PR consolidation
+```bash
+npm install
+npm run dev
+```
 
-## Getting Started
+Open http://localhost:3000.
+
+Technician flow: Login -> Dashboard -> Chat -> Answer Detail -> Dashboard; Dashboard -> Machine History.
+
+Admin flow: Login (Admin toggle) -> Admin Dashboard -> Documents -> Analytics.
+
+The current frontend uses mock data in `lib/data.js`.
 
 ### Backend (FastAPI)
 
 ```bash
 cd backend
 python -m venv venv
-source venv/bin/activate   # Windows: venv\Scripts\activate
+# Windows: venv\Scripts\activate
+# macOS/Linux: source venv/bin/activate
 pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-### Backend API Endpoints
+Backend API endpoints:
 
 - `GET /health` - initial service health check
 - `GET /api/v1/equipment` - equipment catalogue for frontend machine selection
 - `POST /api/v1/search` - ranked source search with optional equipment and document-type filters
 - `POST /api/v1/assistant` - source-referenced troubleshooting guidance
-
-Day 2 contract models are defined in [backend/app/schemas.py](backend/app/schemas.py). They cover equipment, manuals, maintenance logs, safety procedures, search, assistant responses, source excerpts, and errors.
 
 ### Frontend integration
 
